@@ -85,8 +85,8 @@ function Home(){
 
     return(
         <div className="row homeHeading">
-                <div className="row">
-                <h1 className="display-2">
+                <div className="row firstRow">
+                <h1 className="display-3">
                 Stream Search
                 <small className="text-muted display-4">Your one stop shop to know where your favourite movies are streaming!</small>
                 </h1>

@@ -8,7 +8,6 @@ function App() {
     <div className="App">
     <div className="container-fluid">
     <NavBar />
-    <Home />
     <Footer />
     </div>
     </div>

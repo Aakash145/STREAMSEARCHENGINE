@@ -1,9 +1,20 @@
 import React from 'react'
 import logo from '../../assets/images/logo.png'
 import './navbar.css'
+import Home from '../home/home'
+import Discover from '../discover/discover'
+import Contact from '../contact/contact'
+
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from 'react-router-dom';
 
 function NavBar() {
     return (
+      <Router>
         <div className="row">
              <nav class="navbar navbar-expand-lg">
              <a class="navbar-brand" href="#">
@@ -16,18 +27,26 @@ function NavBar() {
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home</a>
+      <Link to="/" class="nav-link">Home</Link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Discover</a>
+      <Link to="/discover" class="nav-link">Discover</Link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Contact Us</a>
+      <Link to="/contact" class="nav-link">Contact Us</Link>
       </li>
     </ul>
   </div>
             </nav>
+            <Routes>
+          <Route path="/" element={<Home />} />
+
+          <Route path="/discover" element={<Discover />} />
+
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
         </div>
+        </Router>
     )
 }
 

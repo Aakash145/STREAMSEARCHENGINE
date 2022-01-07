@@ -12,6 +12,8 @@ function Movie(props){
     const movieId = props.id
     const countryCode = props.code
 
+
+    //React is rendered again only when the props changes here, so that neither the useEffect is called once nor it is called infinite times.
     useEffect(() => {
         axios.get(`/api/movieId/?id=${movieId}`)
         .then((res) => {
