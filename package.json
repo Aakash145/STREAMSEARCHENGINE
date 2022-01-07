@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server/server.js",
-    "build": "cd stream-search && npm install && npm run build"
+    "start": "node server/server.js"
   },
   "keywords": [],
   "engines": {
