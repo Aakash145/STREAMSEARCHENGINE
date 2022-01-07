@@ -1,0 +1,47 @@
+*{
+    font-family: 'Catamaran', sans-serif;
+}
+.navbar{
+    background-color: #0B2637;
+    width: 100%;
+    white-space: nowrap;
+}
+
+
+.navbar-brand{
+    color: white;
+    font-size: 35px;
+    padding: 20px;
+    margin-left: 10px;
+}
+
+.navbar-brand:hover{
+    color: white;
+}
+
+.navbar-brand img{
+    margin-right: 10px;
+}
+.nav-link{
+    color: #899ead;
+    font-size: 25px;
+    padding: 20px;
+    margin-right: 40px;
+}
+
+.nav-link:hover{
+    color: white;
+}
+
+.navbar-toggler-icon{
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .navbar-brand{
+        font-size: 30px;
+        margin-left: 0px;
+    }
+    
+  }
