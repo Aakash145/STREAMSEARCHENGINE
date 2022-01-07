@@ -18,14 +18,14 @@ function Movie(props){
             setMovieData(res.data)
             setLoading(false);
         })
-    }, [])
+    }, [props.id])
 
     useEffect(() => {
       axios.get(`/api/stream/?id=${movieId}&code=${countryCode}`)
       .then((res) => {
         setStreamServices(res.data)
       })
-    }, [])
+    }, [props.id])
 
     if (isLoading) {
         return <div className="App">Loading...</div>;
