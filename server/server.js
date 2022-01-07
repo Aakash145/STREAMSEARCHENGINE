@@ -10,6 +10,12 @@ const MOVIEDBKEY = process.env.MOVIEKEY;
 
 const app = express();
 
+app.use(express.static(path.join(__dirname, '../stream-search/build')));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../stream-search/build', 'index.html'));
+});
+
 //IP Registery API
 app.get("/api/ip", (req, res) => {
     let countryCode = '';
