@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/server.js",
-    "build": "cd server && npm install && npm run build"
+    "build": "cd stream-search && npm install && npm run build"
   },
   "keywords": [],
   "engines": {
