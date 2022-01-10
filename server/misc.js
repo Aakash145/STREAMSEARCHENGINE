@@ -1,4 +1,4 @@
-module.exports = function getIP(){
+module.exports = function getIP(req){
     var ipAddr = req.headers["x-forwarded-for"];
     if (ipAddr){
       var list = ipAddr.split(",");
