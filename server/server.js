@@ -3,7 +3,7 @@ const path = require('path');
 
 const express = require('express');
 const axios = require("axios");
-
+const misc = require("./misc")
 const PORT = process.env.PORT || 3001;
 const IPKEY = process.env.IPKEY;
 const MOVIEDBKEY = process.env.MOVIEKEY;
@@ -19,7 +19,8 @@ app.get('/', (req, res) => {
 //IP Registery API
 app.get("/api/ip", (req, res) => {
     let countryCode = '';
-    axios.get("https://api.ipregistry.co/",{
+    var ipAddr = misc.getIP();
+    axios.get(`https://api.ipregistry.co/${ipAddr}`,{
         params: {
           key: IPKEY,
         }
