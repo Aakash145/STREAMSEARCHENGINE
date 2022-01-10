@@ -19,7 +19,8 @@ app.get('/', (req, res) => {
 //IP Registery API
 app.get("/api/ip", (req, res) => {
     let countryCode = '';
-    var ipAddr = misc.getIP();
+    let ipAddr = misc.getIP();
+    console.log(ipAddr + "This is the CLients IP");
     axios.get(`https://api.ipregistry.co/${ipAddr}`,{
         params: {
           key: IPKEY,
