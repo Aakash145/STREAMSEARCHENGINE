@@ -25,21 +25,25 @@ function Home(){
 
     function searchMovie(e){
         const searchedItem = e.target.value;
-        // if(e.key === " "){
-        //     axios.get("https://api.themoviedb.org/3/search/movie",{
-        //         params: {
-        //           api_key: "496dd84fc27f6d28eafe675507234d8e",
-        //           query: searchedItem
-        //         }
-        //       })
-        //     .then((res) => {
-        //         setResults(res.data.results)
-        //     })
-        // }else 
+        if(e.key === " "){
+            // axios.get("https://api.themoviedb.org/3/search/movie",{
+            //     params: {
+            //       api_key: "",
+            //       query: searchedItem
+            //     }
+            //   })
+            // .then((res) => {
+            //     setResults(res.data.results)
+            // })
+            axios.get(`/api/movie/?name=${searchedItem}`)
+            .then((res) => {
+                setResults(res.data.results);    
+              })
+        }else 
         if(e.key === "Enter"){
             // axios.get("https://api.themoviedb.org/3/search/movie",{
             //     params: {
-            //       api_key: "496dd84fc27f6d28eafe675507234d8e",
+            //       api_key: "",
             //       query: searchedItem
             //     }
             //   })
