@@ -46,7 +46,7 @@ app.get("/api/movie", (req, res) => {
     .then((response) => {
         let result = response.data.results.length;
         if(result != 0){
-            res.json(response.data.results[0].id)
+            res.json(response.data.results)
         }
     })
 })
