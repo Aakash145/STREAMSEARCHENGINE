@@ -35,7 +35,7 @@ function Home(){
         if(e.key === "Enter"){
             axios.get(`/api/movie/?name=${searchedItem}`)
             .then((res) => {
-              setMovieId(res.data.results[0].id)
+              setMovieId(res.data[0].id)
               setSearch(true);  
               })
         }
