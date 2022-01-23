@@ -3,21 +3,32 @@ import './home.css'
 import Movie from '../movie/movie'
 import { useEffect, useState} from 'react'
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux'
+import { movieID } from '../../redux/actions/movieIDActions'
+import { countryCode } from '../../redux/actions/countryCodeActions'
+
 
 function Home(){
 
+    const movieId = useSelector(state => state.movieID.movieID)
+    const cCode = useSelector(state => state.countryCode.countryCode)
+
+    const dispatch = useDispatch()
+
     const [search, setSearch] = useState(false);
     const [results, setResults] = useState([]);
-    const [movieId, setMovieId] = useState();
-    const [countryCode, setCountryCode] = useState();
+    //const [movieId, setMovieId] = useState();
+    //const [countryCode, setCountryCode] = useState();
     var options = '';
 
     useEffect(() => {
       axios.get("/api/ip")
       .then((res) => {
-        setCountryCode(res.data)
+        //setCountryCode(res.data)
+        dispatch(countryCode(res.data))
     })
     //setCountryCode("CA");
+    //dispatch(countryCode("CA"))
     }, [])
 
     useEffect(() => {
@@ -35,7 +46,8 @@ function Home(){
         if(e.key === "Enter"){
             axios.get(`/api/movie/?name=${searchedItem}`)
             .then((res) => {
-              setMovieId(res.data[0].id)
+              //setMovieId(res.data[0].id)
+              dispatch(movieID(res.data[0].id))
               setSearch(true);  
               })
         }
@@ -63,7 +75,8 @@ function Home(){
         for (var i = 0; i < opts.length; i++) {
           if (opts[i].value === val) {
             setSearch(true);
-            setMovieId(opts[i].id)
+            //setMovieId(opts[i].id)
+            dispatch(movieID(opts[i].id))
             break;
           }
         }
@@ -95,7 +108,7 @@ function Home(){
                 </div>
                 </div>
                 <div className="row movieCard">
-                {search && <Movie id={movieId} code={countryCode}/> }
+                {search && <Movie id={movieId} code={cCode}/> }
                 </div>
         </div>
     )
