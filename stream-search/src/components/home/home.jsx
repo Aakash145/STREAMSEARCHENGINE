@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux'
 import { movieID } from '../../redux/actions/movieIDActions'
 import { countryCode } from '../../redux/actions/countryCodeActions'
+import $ from 'jquery'
 
 
 function Home(){
@@ -17,18 +18,13 @@ function Home(){
 
     const [search, setSearch] = useState(false);
     const [results, setResults] = useState([]);
-    //const [movieId, setMovieId] = useState();
-    //const [countryCode, setCountryCode] = useState();
     var options = '';
 
     useEffect(() => {
       axios.get("/api/ip")
       .then((res) => {
-        //setCountryCode(res.data)
         dispatch(countryCode(res.data))
     })
-    //setCountryCode("CA");
-    //dispatch(countryCode("CA"))
     }, [])
 
     useEffect(() => {
@@ -46,10 +42,14 @@ function Home(){
         if(e.key === "Enter"){
             axios.get(`/api/movie/?name=${searchedItem}`)
             .then((res) => {
-              //setMovieId(res.data[0].id)
               dispatch(movieID(res.data[0].id))
               setSearch(true);  
               })
+
+        $('html,body').animate({
+            scrollTop: $(".movieCard").offset().top -20},
+            'slow');
+            
         }
     }
 
@@ -75,7 +75,6 @@ function Home(){
         for (var i = 0; i < opts.length; i++) {
           if (opts[i].value === val) {
             setSearch(true);
-            //setMovieId(opts[i].id)
             dispatch(movieID(opts[i].id))
             break;
           }

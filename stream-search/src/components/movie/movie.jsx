@@ -1,7 +1,8 @@
 import React from 'react'
 import './movie.css'
 import { useEffect, useState} from 'react'
-import axios from 'axios';
+import axios from 'axios'
+import $ from 'jquery'
 
 function Movie(props){
 
@@ -11,6 +12,7 @@ function Movie(props){
 
     const movieId = props.id
     const countryCode = props.code
+    let updatedRating = 0
 
 
     //React is rendered again only when the props changes here, so that neither the useEffect is called once nor it is called infinite times.
@@ -20,6 +22,8 @@ function Movie(props){
             setMovieData(res.data)
             setLoading(false);
         })
+
+        
     }, [props.id])
 
     useEffect(() => {
@@ -29,8 +33,39 @@ function Movie(props){
       })
     }, [props.id])
 
+    useEffect(() => {
+      $('i').addClass('active');
+      while(updatedRating != 5){
+        $('.fa-star#rating-' + updatedRating).removeClass('active')
+        updatedRating++
+      }
+      $('.fa-star#rating-' + updatedRating).removeClass('active');
+    })
+
     if (isLoading) {
         return <div className="App">Loading...</div>;
+    }
+
+    function calculateRatings(imdbRatings){
+      const ratingPercent = (imdbRatings/10)*100
+      const newRatings =  (ratingPercent*5)/100
+
+      if(newRatings > 0 && newRatings < 1.5){
+        updatedRating =  1
+      }else if(newRatings > 1.5 && newRatings < 2.5){
+        updatedRating =  2
+      }else if(newRatings > 2.5 && newRatings < 3.5){
+        updatedRating =  3
+      }else if(newRatings > 3.5 && newRatings < 4.5){
+        updatedRating =  4
+      }else if(newRatings > 4.5){
+        updatedRating =  5
+      }else{
+        updatedRating =  0
+      }
+
+
+
     }
 
     return(
@@ -41,10 +76,20 @@ function Movie(props){
     alt="Chicago Skyscrapers "
   />
   <ul className="list-group list-group-flush">
-    <li className="list-group-item">{movieData.original_title}</li>
+    <li className="list-group-item">{movieData.original_title.toUpperCase()}</li>
     <li className="list-group-item">{movieData.overview}</li>
     <li className="list-group-item">Runtime: {movieData.runtime} minutes</li>
-    <li className="list-group-item">IMDB Rating: {movieData.vote_average}</li>
+    <li className="list-group-item">
+    
+    {calculateRatings(movieData.vote_average)}
+    <div className="rating">
+      <i className="fa fa-star" id="rating-1"></i>
+      <i className="fa fa-star" id="rating-2"></i>
+      <i className="fa fa-star" id="rating-3"></i>
+      <i className="fa fa-star" id="rating-4"></i>
+      <i className="fa fa-star" id="rating-5"></i>
+    </div>
+    </li>
     <li className="list-group-item">Available On: {streamServices.length ? streamServices.map((item) => {
       return (
         streamServices.indexOf(item) != streamServices.length -1 ?<span>{item + ", "}</span> : <span>{item + "."}</span>
