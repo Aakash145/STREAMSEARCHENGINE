@@ -49,7 +49,7 @@ function Home(){
         $('html,body').animate({
             scrollTop: $(".movieCard").offset().top -20},
             'slow');
-            
+
         }
     }
 

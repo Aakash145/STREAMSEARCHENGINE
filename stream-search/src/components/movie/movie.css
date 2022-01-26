@@ -38,11 +38,24 @@
     margin-right: 3px;
 }
 
+.bi-images{
+    border-radius: 15px;
+    box-shadow: 1px 1px 3px 0 rgb(0 0 0 / 40%), inset 0 1px 0 0 hsl(0deg 0% 100% / 10%);
+    width: 8%;
+    margin: auto;
+
+}
+
 
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
     .card-img-top{
         width: 50%;
         margin: auto;
+    }
+    .bi-images{
+        width: 10%;
+        margin: auto;
+    
     }
   }

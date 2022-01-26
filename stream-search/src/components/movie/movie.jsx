@@ -17,13 +17,11 @@ function Movie(props){
 
     //React is rendered again only when the props changes here, so that neither the useEffect is called once nor it is called infinite times.
     useEffect(() => {
-        axios.get(`/api/movieId/?id=${movieId}`)
+      axios.get(`/api/movieId/?id=${movieId}`)
         .then((res) => {
             setMovieData(res.data)
             setLoading(false);
-        })
-
-        
+        })   
     }, [props.id])
 
     useEffect(() => {
@@ -35,37 +33,33 @@ function Movie(props){
 
     useEffect(() => {
       $('i').addClass('active');
-      while(updatedRating != 5){
-        $('.fa-star#rating-' + updatedRating).removeClass('active')
+      while(updatedRating <= 5){
         updatedRating++
+        $('.fa-star#rating-' + updatedRating).removeClass('active')
       }
       $('.fa-star#rating-' + updatedRating).removeClass('active');
     })
 
     if (isLoading) {
-        return <div className="App">Loading...</div>;
+        return <i className="fas fa-spin fa-2x fa-spinner" styles="color:white"></i>;
     }
 
     function calculateRatings(imdbRatings){
-      const ratingPercent = (imdbRatings/10)*100
-      const newRatings =  (ratingPercent*5)/100
+      const newRatings =  imdbRatings/2
 
       if(newRatings > 0 && newRatings < 1.5){
         updatedRating =  1
-      }else if(newRatings > 1.5 && newRatings < 2.5){
+      }else if(newRatings >= 1.5 && newRatings < 2.5){
         updatedRating =  2
-      }else if(newRatings > 2.5 && newRatings < 3.5){
+      }else if(newRatings >= 2.5 && newRatings < 3.5){
         updatedRating =  3
-      }else if(newRatings > 3.5 && newRatings < 4.5){
+      }else if(newRatings >= 3.5 && newRatings < 4.5){
         updatedRating =  4
-      }else if(newRatings > 4.5){
+      }else if(newRatings >= 4.5){
         updatedRating =  5
       }else{
         updatedRating =  0
       }
-
-
-
     }
 
     return(
@@ -92,9 +86,11 @@ function Movie(props){
     </li>
     <li className="list-group-item">Available On: {streamServices.length ? streamServices.map((item) => {
       return (
-        streamServices.indexOf(item) != streamServices.length -1 ?<span>{item + ", "}</span> : <span>{item + "."}</span>
+        streamServices.indexOf(item) != streamServices.length -1 ?<span> &nbsp; <img src={"https://image.tmdb.org/t/p/original"+item} className="bi bi-images" alt="Chicago Skyscrapers "/> &nbsp;</span> 
+        : 
+        <span><img src={"https://image.tmdb.org/t/p/original"+item} className="bi bi-images" alt="Chicago Skyscrapers "/></span>
       )
-    }) : <span>"Not Available on any Platform!"</span>}
+    }) : <span> "Not Available on any Platform!"</span>}
       </li>
   </ul>
 </div>

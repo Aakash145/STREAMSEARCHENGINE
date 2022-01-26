@@ -80,7 +80,8 @@ app.get("/api/stream", (req, res) => {
       const services = response.data.results[countryCode].flatrate;
       let stringServices = [];
       for(var i=0; i< services.length; i++){
-        stringServices.push(services[i].provider_name);
+        stringServices.push(services[i].logo_path);
+        //stringServices.push(services[i].provider_name);
       }
       res.send(stringServices);
     }else{
